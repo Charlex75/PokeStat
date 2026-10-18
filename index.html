@@ -4,39 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PokeStat</title>
+    <link rel="icon" href="/pokeball.png" />
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
     <header>
       <h1>PokeStat</h1>
-      <p>¿Quién tiene más? Adivina qué Pokémon gana en la estadística.</p>
+      <p class="subtitulo">¿Quién tiene más? Adivina qué Pokémon gana en la estadística.</p>
     </header>
 
     <main id="app">
       <p id="estado" role="status"></p>
       <p id="pregunta"></p>
-      
-      <article id="carta-izquierda">
-        <img alt="" />
-        <h2 class="nombre"></h2>
-        <p class="valor"></p>
-      </article>
-      
-      <article id="carta-derecha">
-        <img alt="" />
-        <h2 class="nombre"></h2>
-        <p class="valor"></p>
-      </article>
-      
-      <button id="boton-mas" type="button" disabled>Más</button>
-      <button id="boton-menos" type="button" disabled>Menos</button>
-      <p id="racha">Racha: 0</p>
-      
+
+      <div class="arena">
+        <article id="carta-izquierda" class="carta">
+          <img alt="" />
+          <h2 class="nombre"></h2>
+          <p class="valor"></p>
+        </article>
+
+        <span class="vs" aria-hidden="true">VS</span>
+
+        <article id="carta-derecha" class="carta">
+          <img alt="" />
+          <h2 class="nombre"></h2>
+          <p class="valor"></p>
+        </article>
+      </div>
+
+      <div class="controles">
+        <button id="boton-mas" type="button" disabled>▲ Más</button>
+        <button id="boton-menos" type="button" disabled>▼ Menos</button>
+      </div>
+
+      <div class="marcadores">
+        <p id="racha">Racha: 0</p>
+        <p id="record">Récord: 0</p>
+      </div>
+
       <section id="fin-partida" hidden>
         <p></p>
-        <button id="boton-reiniciar" type="button">
-          Jugar otra vez
-        </button>
+        <button id="boton-reiniciar" type="button">Jugar otra vez</button>
       </section>
     </main>
   </body>

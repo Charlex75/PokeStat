@@ -8,6 +8,7 @@ import {
   obtenerPartida,
   hayEmpate,
   cambiarPokemonDerecho,
+  obtenerRecord,
 } from "./game.js";
 import {
   pintarPokemon,
@@ -17,6 +18,7 @@ import {
   mostrarError,
   ocultarEstado,
   pintarRacha,
+  pintarRecord,
   bloquearBotones,
   marcarResultado,
   limpiarResultado,
@@ -70,6 +72,7 @@ async function empezarPartida() {
   ocultarFinPartida();
   limpiarResultado();
   pintarRacha(0);
+  pintarRecord(obtenerRecord());
   mostrarCargando();
 
   try {
@@ -108,6 +111,7 @@ async function manejarRespuesta(eleccion) {
   marcarResultado(acierto);
 
   if (!acierto) {
+    pintarRecord(obtenerRecord());
     mostrarFinPartida(racha);
     return;
   }

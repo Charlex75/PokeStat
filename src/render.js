@@ -9,6 +9,7 @@ const cartas = {
 const pregunta = document.querySelector("#pregunta");
 const estado = document.querySelector("#estado");
 const rachaElemento = document.querySelector("#racha");
+const recordElemento = document.querySelector("#record");
 const botonMas = document.querySelector("#boton-mas");
 const botonMenos = document.querySelector("#boton-menos");
 const finPartida = document.querySelector("#fin-partida");
@@ -68,6 +69,10 @@ export function ocultarEstado() {
 
 export function pintarRacha(racha) {
   rachaElemento.textContent = `Racha: ${racha}`;
+}
+
+export function pintarRecord(record) {
+  recordElemento.textContent = `Récord: ${record}`;
 }
 
 export function bloquearBotones(bloqueado) {

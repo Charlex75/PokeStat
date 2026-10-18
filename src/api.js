@@ -1,5 +1,6 @@
 // Peticiones a PokéAPI: sin DOM.
 import { STATS, IMAGEN_POR_DEFECTO } from "./constantes.js";
+import { leer, guardar } from "./almacen.js";
 
 const URL_BASE = "https://pokeapi.co/api/v2";
 
@@ -29,6 +30,13 @@ function limpiarPokemon(datos) {
 }
 
 export async function obtenerPokemon(id) {
+  const clave = `pokemon-${id}`;
+  const cache = leer(clave);
+
+  if (cache) {
+    return cache;
+  }
+
   const response = await fetch(`${URL_BASE}/pokemon/${id}`);
 
   if (!response.ok) {
@@ -51,5 +59,6 @@ export async function obtenerPokemon(id) {
     );
   }
 
+  guardar(clave, pokemon);
   return pokemon;
 }

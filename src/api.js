@@ -1,5 +1,6 @@
 // Peticiones a PokéAPI: pedir datos y devolverlos ya limpios, nada de DOM aquí
 const URL_BASE = "https://pokeapi.co/api/v2";
+const IMAGEN_POR_DEFECTO = "/pokeball.png";
 
 function limpiarPokemon(datos) {
   const stats = Object.fromEntries(
@@ -14,7 +15,9 @@ function limpiarPokemon(datos) {
   return {
     id: datos.id,
     nombre: datos.name,
-    imagen: datos.sprites.other["official-artwork"].front_default,
+    imagen:
+      datos.sprites.other?.["official-artwork"]?.front_default ??
+      IMAGEN_POR_DEFECTO,
     stats,
     total,
   };

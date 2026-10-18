@@ -1,8 +1,13 @@
-// Peticiones a PokéAPI: pedir datos y devolverlos ya limpios, nada de DOM aquí
+// Peticiones a PokéAPI: sin DOM.
+import { STATS, IMAGEN_POR_DEFECTO } from "./constantes.js";
+
 const URL_BASE = "https://pokeapi.co/api/v2";
-const IMAGEN_POR_DEFECTO = "/pokeball.png";
 
 function limpiarPokemon(datos) {
+  if (!Array.isArray(datos.stats)) {
+    throw new Error("El Pokémon no tiene una lista de estadísticas válida.");
+  }
+
   const stats = Object.fromEntries(
     datos.stats.map(({ stat, base_stat }) => [stat.name, base_stat])
   );
@@ -16,7 +21,7 @@ function limpiarPokemon(datos) {
     id: datos.id,
     nombre: datos.name,
     imagen:
-      datos.sprites.other?.["official-artwork"]?.front_default ??
+      datos.sprites?.other?.["official-artwork"]?.front_default ??
       IMAGEN_POR_DEFECTO,
     stats,
     total,
@@ -31,5 +36,20 @@ export async function obtenerPokemon(id) {
   }
 
   const datos = await response.json();
-  return limpiarPokemon(datos);
+  const pokemon = limpiarPokemon(datos);
+
+  const statsValidas = STATS.every(
+    stat =>
+      Object.hasOwn(pokemon.stats, stat) &&
+      Number.isFinite(pokemon.stats[stat]) &&
+      pokemon.stats[stat] >= 0
+  );
+
+  if (!statsValidas) {
+    throw new Error(
+      `El Pokémon ${pokemon.nombre} no tiene las seis estadísticas válidas.`
+    );
+  }
+
+  return pokemon;
 }

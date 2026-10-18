@@ -1,4 +1,6 @@
 // Presentación: recibe datos y los muestra en el DOM.
+import { IMAGEN_POR_DEFECTO } from "./constantes.js";
+
 const cartas = {
   izquierda: document.querySelector("#carta-izquierda"),
   derecha: document.querySelector("#carta-derecha"),
@@ -21,13 +23,24 @@ const NOMBRES_STATS = {
   speed: "Velocidad",
 };
 
+Object.values(cartas).forEach(carta => {
+  const imagen = carta.querySelector("img");
+
+  imagen.addEventListener("error", () => {
+    if (imagen.getAttribute("src") !== IMAGEN_POR_DEFECTO) {
+      imagen.src = IMAGEN_POR_DEFECTO;
+    }
+  });
+});
+
 export function pintarPokemon(carta, pokemon) {
   const elemento = cartas[carta];
   const imagen = elemento.querySelector("img");
+  const nombre = pokemon.nombre.replaceAll("-", " ");
 
   imagen.src = pokemon.imagen;
-  imagen.alt = pokemon.nombre;
-  elemento.querySelector(".nombre").textContent = pokemon.nombre;
+  imagen.alt = nombre;
+  elemento.querySelector(".nombre").textContent = nombre;
 }
 
 export function pintarValor(carta, valor) {

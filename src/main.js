@@ -127,8 +127,8 @@ async function manejarRespuesta(eleccion) {
     aceptaRespuesta = true;
     bloquearBotones(false);
   } catch (error) {
-    mostrarFinPartida(racha);
     mostrarError(error.message);
+    mostrarReintento();
   }
 }
 

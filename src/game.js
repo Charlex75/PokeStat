@@ -1,14 +1,7 @@
 // Reglas del juego: estado de la partida, racha y comprobar respuestas, nada de DOM aquí
-const TOTAL_POKEMON = 1025;
+import { STATS } from "./constantes.js";
 
-const STATS = [
-  "hp",
-  "attack",
-  "defense",
-  "special-attack",
-  "special-defense",
-  "speed",
-];
+const TOTAL_POKEMON = 1025;
 
 const partida = {
   izquierdo: null,
